@@ -4,6 +4,14 @@
 
 void SystemClock_Config ( void );
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	if ( GPIO_Pin == Cutter_Pin ) {
+		HAL_NVIC_DisableIRQ( Cutter_EXTI_IRQn );
+		HAL_GPIO_WritePin( LedGreen_GPIO_Port , LedGreen_Pin , GPIO_PIN_RESET );
+		HAL_GPIO_WritePin( LedRed_GPIO_Port   , LedRed_Pin   , GPIO_PIN_SET   );
+	}
+}
+
 int main	( void ) {
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
@@ -16,8 +24,6 @@ int main	( void ) {
   MX_GPIO_Init();
 
   while ( 1 )   {
-	  HAL_GPIO_TogglePin( GPIOA , LedGreen_Pin|LedRed_Pin );
-	  HAL_Delay( 250 );
 
   }
 }
