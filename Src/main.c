@@ -16,6 +16,8 @@ int main	( void ) {
   MX_GPIO_Init();
 
   while ( 1 )   {
+	  HAL_GPIO_TogglePin( GPIOA , LedGreen_Pin|LedRed_Pin );
+	  HAL_Delay( 250 );
 
   }
 }
